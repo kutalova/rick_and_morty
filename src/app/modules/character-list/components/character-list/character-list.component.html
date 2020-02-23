@@ -1,0 +1,18 @@
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th scope="col">Character name</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Number of episodes</th>
+        <th scope="col">Origin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let character of characters">
+        <th scope="row">{{character.name}}</th>
+        <td>{{character.gender}}</td>
+        <td>{{character.episode.length}}</td>
+        <td>{{character.origin.name}}</td>
+    </tr>
+    </tbody>
+</table>
