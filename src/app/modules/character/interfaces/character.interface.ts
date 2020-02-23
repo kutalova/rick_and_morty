@@ -1,7 +1,7 @@
 import { CharacterListInfoInterface } from './characterListInfo.interface';
-import { CharacterDataInterface } from './characterData.interface';
+import { CharacterDetailsInterface } from './characterDetailsInterface';
 
 export interface CharacterInterface {
     info: CharacterListInfoInterface,
-    results: Array<CharacterDataInterface>,
+    results: Array<CharacterDetailsInterface>,
 }

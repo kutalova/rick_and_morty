@@ -1,7 +1,7 @@
 import { CharacterGenderEnum, CharacterSpeciesEnum, CharacterStatusEnum } from '../enums/character.enum';
 import { CharacterLocationInterface } from './characterLocation.interface';
 
-export interface CharacterDataInterface {
+export interface CharacterDetailsInterface {
     id: number,
     name: string,
     status: CharacterStatusEnum,

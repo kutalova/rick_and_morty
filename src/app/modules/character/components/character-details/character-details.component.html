@@ -1,0 +1,110 @@
+<button type="button" class="btn btn-outline-light mt-2 ml-3" role="button" (click)="back()">
+    Back to List
+</button>
+
+<section class="w-25 p-3">
+    <table class="table table-bordered table-dark">
+        <tbody>
+        <tr>
+            <th colspan="2" class="text-center">
+                {{character?.name}}
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <img [src]="character?.image" [alt]="character?.name"/>
+            </th>
+        </tr>
+        <tr>
+            <th scope="row">
+                Status
+            </th>
+            <td>
+                <div [ngSwitch]="character?.status">
+                    <ng-container *ngSwitchCase="characterStatus.dead">
+
+                        <fa-icon icon="dizzy"></fa-icon>
+                        {{characterStatus.dead}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="characterStatus.alive">
+                        <fa-icon icon="grin"></fa-icon>
+                        {{characterStatus.alive}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="characterStatus.unknown">
+                        <fa-icon icon="user-slash"></fa-icon>
+                        {{characterStatus.unknown}}
+                    </ng-container>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Gender
+            </th>
+            <td>
+                <div [ngSwitch]="character?.gender">
+                    <ng-container *ngSwitchCase="characterGender.female">
+
+                        <fa-icon icon="venus"></fa-icon>
+                        {{characterGender.female}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="characterGender.male">
+                        <fa-icon icon="mars"></fa-icon>
+                        {{characterGender.male}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="characterGender.genderless">
+                        <fa-icon icon="genderless"></fa-icon>
+                        {{characterGender.genderless}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="characterGender.unknown">
+                        <fa-icon icon="user-slash"></fa-icon>
+                        {{characterGender.unknown}}
+                    </ng-container>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Species
+            </th>
+            <td>
+                <div [ngSwitch]="character?.species">
+                    <ng-container *ngSwitchCase="characterSpecies.alien">
+
+                        <fa-icon icon="bug"></fa-icon>
+                        {{characterSpecies.alien}}
+                    </ng-container>
+                    <ng-container *ngSwitchCase="characterSpecies.human">
+                        <fa-icon icon="male"></fa-icon>
+                        {{characterSpecies.human}}
+                    </ng-container>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Origin
+            </th>
+            <td>
+                {{character?.origin.name}}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Current Location
+            </th>
+            <td>
+                {{character?.location.name}}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                Number of Episodes
+            </th>
+            <td>
+                {{character?.episode.length}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>

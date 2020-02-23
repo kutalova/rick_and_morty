@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CharacterListModule } from './modules/character-list/character-list.module';
+import { CharacterModule } from './modules/character/character.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared/shared.module';
 
@@ -14,7 +14,7 @@ import { SharedModule } from './modules/shared/shared.module';
     imports: [
         BrowserModule,
         SharedModule,
-        CharacterListModule,
+        CharacterModule,
         HttpClientModule,
         AppRoutingModule
     ],

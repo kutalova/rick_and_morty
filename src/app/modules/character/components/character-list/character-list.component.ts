@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CharacterService } from '../../services/character.service';
 import { CharacterInterface } from '../../interfaces/character.interface';
-import { CharacterDataInterface } from '../../interfaces/characterData.interface';
+import { CharacterDetailsInterface } from '../../interfaces/characterDetailsInterface';
 
 @Component( {
     selector: 'app-character-list',
@@ -10,7 +10,7 @@ import { CharacterDataInterface } from '../../interfaces/characterData.interface
 } )
 export class CharacterListComponent implements OnInit {
 
-    characters: Array<CharacterDataInterface>;
+    characters: Array<CharacterDetailsInterface>;
 
     constructor(
         private _characterService: CharacterService
