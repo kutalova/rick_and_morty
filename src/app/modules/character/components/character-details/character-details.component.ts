@@ -33,8 +33,6 @@ export class CharacterDetailsComponent implements OnInit {
     getCharacterInfo( id: number ) {
         this._characterService.getCharacterById( id ).subscribe( ( data: CharacterDetailsInterface ) => {
             this.character = data;
-            console.log( this.character, this.characterGender );
-
         } );
     }
 

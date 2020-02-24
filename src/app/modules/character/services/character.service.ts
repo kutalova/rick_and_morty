@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CharacterInterface } from '../interfaces/character.interface';
 import { CharacterDetailsInterface } from '../interfaces/characterDetailsInterface';
@@ -34,4 +34,17 @@ export class CharacterService {
     getCharacterById( id: number ): Observable<CharacterDetailsInterface> {
         return this._http.get<CharacterDetailsInterface>( environment.serverDomain + 'character/' + id );
     }
+
+    /**
+     * method returns details about selected Rick and Morty character
+     * @method getCharacterByName
+     * @param name: character's name
+     * @return Observable<CharacterDetailsInterface>
+     */
+    getCharacterByName( name: string ): Observable<CharacterInterface> {
+        const params = new HttpParams().set( 'name', name );
+        return this._http.get<CharacterInterface>( environment.serverDomain + 'character/', { params } );
+    }
+
+
 }

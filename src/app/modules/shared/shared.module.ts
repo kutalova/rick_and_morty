@@ -12,6 +12,9 @@ import { faMars } from '@fortawesome/free-solid-svg-icons';
 import { faVenus } from '@fortawesome/free-solid-svg-icons';
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { faGrin } from '@fortawesome/free-solid-svg-icons';
+import { HeaderComponent } from './components/header/header.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchService } from './services/search.service';
 
 @NgModule( {
     imports: [
@@ -22,15 +25,16 @@ import { faGrin } from '@fortawesome/free-solid-svg-icons';
         NgbModule,
         ReactiveFormsModule,
     ],
-    declarations: [],
+    declarations: [HeaderComponent, SearchComponent],
     exports: [
         RouterModule,
         FormsModule,
         FontAwesomeModule,
         NgbModule,
         ReactiveFormsModule,
+        HeaderComponent
     ],
-    providers: [],
+    providers: [SearchService],
 } )
 export class SharedModule {
     constructor(library: FaIconLibrary) {

@@ -7,6 +7,7 @@ import { EpisodeService } from '../../services/episode.service';
 import { EpisodeInterface } from '../../interfaces/episode.interface';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { SearchService } from '../../../shared/services/search.service';
 
 @Component( {
     selector: 'app-character-list',
@@ -21,14 +22,25 @@ export class CharacterListComponent implements OnInit {
     constructor(
         private _characterService: CharacterService,
         private _episodeService: EpisodeService,
+        private _searchService: SearchService,
         private modalService: NgbModal
     ) {
     }
 
     ngOnInit() {
-        this._characterService.getCharacters().subscribe( ( data: CharacterInterface ) => {
-            this.characters = data.results;
+        this._searchService.searchState.subscribe( ( data ) => {
+            if ( data ) {
+                this._characterService.getCharacterByName( data ).subscribe( ( chars: CharacterInterface ) => {
+                        this.characters = chars.results;
+                    }, ( error ) => console.error( error )
+                );
+            } else {
+                this._characterService.getCharacters().subscribe( ( chars: CharacterInterface ) => {
+                    this.characters = chars.results;
+                } );
+            }
         } );
+
     }
 
     open( content, charEpisodes: Array<string> ) {
