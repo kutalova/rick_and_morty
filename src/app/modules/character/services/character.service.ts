@@ -26,7 +26,7 @@ export class CharacterService {
     }
 
     /**
-     * method return details about chose Rick and Morty character
+     * method returns details about selected Rick and Morty character
      * @method getCharacterById
      * @param id: character's id
      * @return Observable<CharacterDetailsInterface>

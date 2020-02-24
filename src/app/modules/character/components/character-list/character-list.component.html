@@ -16,9 +16,34 @@
                 </a>
             </th>
             <td>{{character.gender}}</td>
-            <td>{{character.episode.length}}</td>
+            <td>
+                <a class="text-light" (click)="open(content, character.episode)" role="button">
+                    {{character.episode.length}}
+                </a>
+            </td>
             <td>{{character.origin.name}}</td>
         </tr>
         </tbody>
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">List of Episodes</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ol class="episode_info_wrapper">
+                    <li *ngFor="let episode of episodes">
+                        <h4 class="name">{{episode.name}}</h4>
+                        <div class="air_date">{{episode.air_date}}</div>
+                        <div class="episode">{{episode.episode}}</div>
+                    </li>
+
+                </ol>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close()">OK</button>
+            </div>
+        </ng-template>
     </table>
 </section>

@@ -5,6 +5,7 @@ import { CharacterService } from './services/character.service';
 import { SharedModule } from '../shared/shared.module';
 import { CharacterRoutingModule } from './character.routing.module';
 import { CharacterDetailsComponent } from './components/character-details/character-details.component';
+import { EpisodeService } from './services/episode.service';
 
 
 @NgModule( {
@@ -17,7 +18,9 @@ import { CharacterDetailsComponent } from './components/character-details/charac
         SharedModule,
         CharacterRoutingModule,
     ],
-    providers: [ CharacterService ]
+    providers: [ CharacterService,
+                 EpisodeService,
+    ]
 } )
 export class CharacterModule {
 }
