@@ -32,9 +32,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ol class="episode_info_wrapper">
-                    <li *ngFor="let episode of episodes">
-                        <h4 class="name">{{episode.name}}</h4>
+                <ol class="list-group">
+                    <li class="list-group-item" *ngFor="let episode of episodes">
+                        <h5 class="name">{{episode.name}}</h5>
                         <div class="air_date">{{episode.air_date}}</div>
                         <div class="episode">{{episode.episode}}</div>
                     </li>

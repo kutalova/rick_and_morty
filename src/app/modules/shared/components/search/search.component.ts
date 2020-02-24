@@ -1,16 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, take, takeUntil } from 'rxjs/operators';
 import { CharacterService } from '../../../character/services/character.service';
 import { SearchService } from '../../services/search.service';
+import { Subject } from 'rxjs';
 
 @Component( {
     selector: 'app-search',
     templateUrl: './search.component.html',
     styleUrls: [ './search.component.scss' ]
 } )
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
+
+    private _unsubscriber = new Subject();
 
     /**
      * Search input setter
@@ -48,7 +51,7 @@ export class SearchComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.search.valueChanges.pipe( debounceTime( 250 ), distinctUntilChanged() ).subscribe( value => {
+        this.search.valueChanges.pipe( debounceTime( 250 ), distinctUntilChanged(), takeUntil( this._unsubscriber ) ).subscribe( value => {
             if ( !value ) {
                 const params = { ...this.queryParams };
                 delete params.name;
@@ -58,7 +61,7 @@ export class SearchComponent implements OnInit {
             }
             this._searchService.searchState.next( value );
         } );
-        this._route.queryParams.subscribe( ( params: Params ) => {
+        this._route.queryParams.pipe( takeUntil( this._unsubscriber ) ).subscribe( ( params: Params ) => {
             this.queryParams = params;
             if ( params.name ) {
                 this.search = params.name;
@@ -96,6 +99,11 @@ export class SearchComponent implements OnInit {
         if ( !this.search.value ) {
             this.search.markAsUntouched();
         }
+    }
+
+    ngOnDestroy() {
+        this._unsubscriber.next();
+        this._unsubscriber.complete();
     }
 }
 

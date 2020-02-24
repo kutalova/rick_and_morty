@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { CharacterModule } from './modules/character/character.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared/shared.module';
+import { LoginModule } from './modules/login/login.module';
+import { UnauthorizedUserGuard } from './modules/shared/guards/unauthorized.guard';
+import { NgtUniversalModule } from '@ng-toolkit/universal';
 
 @NgModule( {
     declarations: [
@@ -14,11 +17,13 @@ import { SharedModule } from './modules/shared/shared.module';
     imports: [
         BrowserModule,
         SharedModule,
+        LoginModule,
         CharacterModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgtUniversalModule,
     ],
-    providers: [],
+    providers: [UnauthorizedUserGuard],
     bootstrap: [ AppComponent ]
 } )
 export class AppModule {

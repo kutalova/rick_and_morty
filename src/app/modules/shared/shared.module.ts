@@ -25,19 +25,19 @@ import { SearchService } from './services/search.service';
         NgbModule,
         ReactiveFormsModule,
     ],
-    declarations: [HeaderComponent, SearchComponent],
+    declarations: [ HeaderComponent, SearchComponent ],
     exports: [
         RouterModule,
         FormsModule,
         FontAwesomeModule,
         NgbModule,
         ReactiveFormsModule,
-        HeaderComponent
+        HeaderComponent,
     ],
-    providers: [SearchService],
+    providers: [ SearchService, SearchService],
 } )
 export class SharedModule {
-    constructor(library: FaIconLibrary) {
-        library.addIcons(faVenus, faMars, faGenderless, faBug, faUserSlash, faMale, faDizzy, faGrin);
+    constructor( library: FaIconLibrary ) {
+        library.addIcons( faVenus, faMars, faGenderless, faBug, faUserSlash, faMale, faDizzy, faGrin );
     }
 }

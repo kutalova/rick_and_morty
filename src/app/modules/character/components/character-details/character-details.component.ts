@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CharacterService } from '../../services/character.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterDetailsInterface } from '../../interfaces/characterDetailsInterface';
 import { CharacterGenderEnum, CharacterSpeciesEnum, CharacterStatusEnum } from '../../enums/character.enum';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component( {
     selector: 'app-character-details',
     templateUrl: './character-details.component.html',
     styleUrls: [ './character-details.component.scss' ]
 } )
-export class CharacterDetailsComponent implements OnInit {
+export class CharacterDetailsComponent implements OnInit, OnDestroy {
 
+    private _unsubscriber = new Subject();
     character: CharacterDetailsInterface;
     characterGender = CharacterGenderEnum;
     characterStatus = CharacterStatusEnum;
@@ -24,20 +27,29 @@ export class CharacterDetailsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this._activatedRoute.params.subscribe( ( data ) => {
-            this.getCharacterInfo( data.id );
-        } );
+        this._activatedRoute.params
+            .pipe( takeUntil( this._unsubscriber ) )
+            .subscribe( ( data ) => {
+                this.getCharacterInfo( data.id );
+            } );
 
     }
 
     getCharacterInfo( id: number ) {
-        this._characterService.getCharacterById( id ).subscribe( ( data: CharacterDetailsInterface ) => {
-            this.character = data;
-        } );
+        this._characterService.getCharacterById( id )
+            .pipe( takeUntil( this._unsubscriber ) )
+            .subscribe( ( data: CharacterDetailsInterface ) => {
+                this.character = data;
+            } );
     }
 
     back() {
-        this._router.navigate(['/']);
+        this._router.navigate( [ '/' ] );
+    }
+
+    ngOnDestroy() {
+        this._unsubscriber.next();
+        this._unsubscriber.complete();
     }
 
 }
