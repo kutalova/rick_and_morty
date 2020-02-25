@@ -13,10 +13,25 @@ import { takeUntil } from 'rxjs/operators';
 } )
 export class CharacterDetailsComponent implements OnInit, OnDestroy {
 
+    /**
+     * Unsubscriber
+     */
     private _unsubscriber = new Subject();
+    /**
+     * Character personal info
+     */
     character: CharacterDetailsInterface;
+    /**
+     * enum of possible genders
+     */
     characterGender = CharacterGenderEnum;
+    /**
+     * enum of possible statuses
+     */
     characterStatus = CharacterStatusEnum;
+    /**
+     * enum of species
+     */
     characterSpecies = CharacterSpeciesEnum;
 
     constructor(
@@ -35,6 +50,11 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
 
     }
 
+    /**
+     * Get more detailed info about character based on it's id
+     * @method getCharacterInfo
+     * @param id - character's id
+     */
     getCharacterInfo( id: number ) {
         this._characterService.getCharacterById( id )
             .pipe( takeUntil( this._unsubscriber ) )
@@ -43,6 +63,10 @@ export class CharacterDetailsComponent implements OnInit, OnDestroy {
             } );
     }
 
+    /**
+     * closes info tab and returns to the full list
+     * @method back
+     */
     back() {
         this._router.navigate( [ '/' ] );
     }

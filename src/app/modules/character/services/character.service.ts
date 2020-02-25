@@ -39,12 +39,22 @@ export class CharacterService {
      * method returns details about selected Rick and Morty character
      * @method getCharacterByName
      * @param name: character's name
-     * @return Observable<CharacterDetailsInterface>
+     * @return Observable<CharacterInterface>
      */
     getCharacterByName( name: string ): Observable<CharacterInterface> {
         const params = new HttpParams().set( 'name', name );
         return this._http.get<CharacterInterface>( environment.serverDomain + 'character/', { params } );
     }
 
+    /**
+     * gets list of characters based on the page number
+     * @method getCharactersList
+     * @param page: page number
+     * @return Observable<CharacterInterface>
+     */
+    getCharactersList( page: number ): Observable<CharacterInterface> {
+        const params = new HttpParams().set( 'page', String( page ) );
+        return this._http.get<CharacterInterface>( environment.serverDomain + 'character/', { params } );
+    }
 
 }

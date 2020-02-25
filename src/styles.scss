@@ -1,4 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
 body {
   background-color: #343a40;
+}
+
+ul.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+a.page-link {
+  background-color: #343a40;
+  color: #17a2b8;
+  border-color: #454d55;
+}
+.page-item.active .page-link {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+.page-item.disabled .page-link {
+  background:  #495057;
+  border-color:  #495057;
 }

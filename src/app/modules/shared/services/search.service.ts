@@ -5,5 +5,8 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 } )
 export class SearchService {
+    /**
+     * has current searchbar value
+     */
     searchState = new BehaviorSubject( '' );
 }

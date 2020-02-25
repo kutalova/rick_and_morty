@@ -23,6 +23,9 @@
             </td>
             <td>{{character.origin.name}}</td>
         </tr>
+        <ngb-pagination [collectionSize]="info?.count" [pageSize]="pageSize" [maxSize]="5"
+                        (pageChange)="loadPage($event)" [(page)]="page"
+                        aria-label="pagination"></ngb-pagination>
         </tbody>
         <ng-template #content let-modal>
             <div class="modal-header">

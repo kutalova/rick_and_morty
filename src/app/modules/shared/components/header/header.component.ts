@@ -10,7 +10,14 @@ import { takeUntil } from 'rxjs/operators';
 } )
 export class HeaderComponent implements OnInit, OnDestroy {
 
+    /**
+     * Unsubscriber
+     */
     private _unsubscriber = new Subject();
+
+    /**
+     * Variable used to check whether user exists
+     */
     user = false;
 
     constructor(
@@ -22,6 +29,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this._userService._access.pipe( takeUntil( this._unsubscriber ) ).subscribe( ( data ) => this.user = data );
     }
 
+    /**
+     * Logout
+     */
     logout() {
         this._userService.logout();
     }
