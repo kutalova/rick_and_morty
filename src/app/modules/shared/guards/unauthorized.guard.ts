@@ -18,6 +18,7 @@ export class UnauthorizedUserGuard implements CanActivate, CanLoad, CanActivateC
      */
     private _accessCheck() {
 
+        this._usersService.checkLogin();
         return this._usersService._access.pipe(
             tap( ( access ) => !access && this._router.navigate( [ '/login' ] ) )
         );

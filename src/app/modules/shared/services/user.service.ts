@@ -35,6 +35,13 @@ export class UserService {
     }
 
     /**
+     * checks if user data exists in Local Storage
+     */
+    checkLogin() {
+        this.localStorage.getItem( 'user' ) ? this._access.next( true ) : this._access.next( false );
+    }
+
+    /**
      * Logout. Removes user data from LocalStorage
      *
      * @method Logout
@@ -43,6 +50,6 @@ export class UserService {
     logout() {
         this.localStorage.removeItem( 'user' );
         this._access.next( null );
-        this._router.navigate( [ '/login' ] ).then(() => this._router.navigate([{outlets: {details: null}}]));
+        this._router.navigate( [ '/login' ] ).then( () => this._router.navigate( [ { outlets: { details: null } } ] ) );
     }
 }
